@@ -1,6 +1,10 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in sitemap_updater.gemspec
+gem "zlib"
+gem "net-ssh"
+gem "tilt"
+gem "nokogiri"
+
 gemspec
 
 gem "rake", "~> 12.0"
