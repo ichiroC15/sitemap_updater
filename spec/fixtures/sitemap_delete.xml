@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>http://www.example.com/sitemap_delete.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>http://www.example.com/sitemap_delete_1.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>http://www.example.com/sitemap_delete_2.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>http://www.example.com/sitemap_delete_3.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>http://www.example.com/sitemap_delete_4.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>http://www.example.com/sitemap_test.xml.gz</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </sitemap>
+</sitemapindex>
