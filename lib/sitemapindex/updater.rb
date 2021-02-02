@@ -3,7 +3,6 @@ require "sitemap_updater/version"
 module Sitemapindex
   class Updater
     ISO_8601     = "%Y-%m-%dT%H:%M:%S%:z"
-
     class << self
       # @params(Time, Str, Str, Arr, Str)
       # [Time]the time when the process started

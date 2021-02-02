@@ -6,14 +6,15 @@ require "tilt"
 require "zlib"
 
 RSpec.describe Sitemaps::Creator do
-  describe "SitemapCreator" do
+  describe "Sitemaps::Creator" do
     let!(:time_freeze) { Timecop.freeze("2020-01-01") }
-    let(:creator)            { Sitemaps::Creator }
+    let(:creator) { Sitemaps::Creator }
 
-    describe "#create_sitemaps(sitemaps_dir, sitemap_name, urls, conds = {})" do
+    describe "#create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds = {})" do
       after(:each) { system("rm spec/test_sitemap*") }
-      subject(:result)   { creator.create_sitemaps(sitemaps_dir, sitemap_name, urls, conds) }
-      let(:sitemaps_dir) { "spec/"}
+      subject(:result)   { creator.create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds) }
+      let(:start_time)   { Time.now }
+      let(:sitemaps_dir) { "spec/" }
       let(:sitemap_name) { "test_sitemap" }
       let(:urls)         { ["url0", "url1", "url2"] }
       let(:conds)        { { "frequency" => "daily", "priority" => "0.5" } }
