@@ -1,4 +1,5 @@
 require "sitemap_updater/version"
+require "errors"
 require "sitemaps/creator"
 require "sitemapindex/updater"
 
