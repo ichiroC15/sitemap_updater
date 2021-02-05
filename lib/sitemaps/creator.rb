@@ -4,7 +4,6 @@ module Sitemaps
   class Creator
     MAX_NUM_URLS = 5000
     ISO_8601     = "%Y-%m-%dT%H:%M:%S%:z"
-
     class << self
       # @params(Str, Str, Time, Arr, Str, Str)
       # [Str]the name of the sitemap file
@@ -13,8 +12,10 @@ module Sitemaps
       # [Hash]the conditions of urls, keys = ["frequency", "priority"]
       # @return Arr
       # the paths of the created sitemaps
-      def create_sitemaps(sitemaps_dir, sitemap_name, urls, conds = {})
-        start_time    = Time.now
+      def create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds)
+        raise SitemapsCreateError, "The specified directory does not exist." unless Dir.exist?(sitemaps_dir)
+        raise SitemapsCreateError, "The given URL array is empty." if urls.empty?
+
         sitemap_paths = []
         grouped_urls = urls.each_slice(MAX_NUM_URLS).to_a
         grouped_urls.each_with_index do |sliced_urls, idx|
@@ -70,10 +71,9 @@ module Sitemaps
                               priority: conds["priority"]  || "0.5")
       end
 
-      private
-        def template
-          "lib/sitemaps/template.erb"
-        end
+      def template
+        "lib/sitemaps/template.erb"
+      end
     end
   end
 end

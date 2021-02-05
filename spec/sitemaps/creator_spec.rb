@@ -6,17 +6,19 @@ require "tilt"
 require "zlib"
 
 RSpec.describe Sitemaps::Creator do
-  describe "SitemapCreator" do
+  describe "Sitemaps::Creator" do
     let!(:time_freeze) { Timecop.freeze("2020-01-01") }
-    let(:creator)            { Sitemaps::Creator }
+    let(:creator) { Sitemaps::Creator }
 
-    describe "#create_sitemaps(sitemaps_dir, sitemap_name, urls, conds = {})" do
+    describe "#create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds = {})" do
       after(:each) { system("rm spec/test_sitemap*") }
-      subject(:result)   { creator.create_sitemaps(sitemaps_dir, sitemap_name, urls, conds) }
-      let(:sitemaps_dir) { "spec/"}
+      subject(:result)   { creator.create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds) }
+      let(:start_time)   { Time.now }
+      let(:sitemaps_dir) { "spec/" }
       let(:sitemap_name) { "test_sitemap" }
       let(:urls)         { ["url0", "url1", "url2"] }
       let(:conds)        { { "frequency" => "daily", "priority" => "0.5" } }
+      # normally
       context "when given args correctly" do
         it "returns [Arr]the paths of the created sitemaps" do
           expect(result).to eq(["spec/test_sitemap.xml.gz"])
@@ -28,6 +30,21 @@ RSpec.describe Sitemaps::Creator do
         it "returns [Arr]the paths of the created sitemaps" do
           change_max_num_urls
           expect(result).to eq(["spec/test_sitemap.xml.gz", "spec/test_sitemap_1.xml.gz","spec/test_sitemap_2.xml.gz"])
+        end
+      end
+      #exceptionally
+      context "when the specified directory as args(sitemaps_dir) does not exist" do
+        let(:sitemaps_dir) { "spec/unexistdir" }
+        it "raise SitemapsCreateError" do
+          expect{ result }.to raise_error(SitemapsCreateError)
+          expect{ result }.to raise_error("The specified directory does not exist.")
+        end
+      end
+      context "when the given args(urls) is empty" do
+        let(:urls) { [] }
+        it "raise SitemapsCreateError" do
+          expect{ result }.to raise_error(SitemapsCreateError)
+          expect{ result }.to raise_error("The given URL array is empty.")
         end
       end
     end
