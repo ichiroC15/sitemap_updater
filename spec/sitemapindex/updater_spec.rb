@@ -22,6 +22,7 @@ RSpec.describe Sitemapindex::Updater do
       let(:name)       { "sitemap_test" }
       let(:paths)      { ["/home/sitemaps/sitemap_test.xml.gz", "/home/sitemaps/sitemap_test_1.xml.gz", "/home/sitemaps/sitemap_test_2.xml.gz"] }
       let(:url)        { "http://www.example.com/" }
+      # normally
       context "when given args correctly" do
         it "keeps other sitemaps nodes" do
           expect(result.search("sitemapindex/sitemap").size).to eq(8)
@@ -47,6 +48,14 @@ RSpec.describe Sitemapindex::Updater do
             "http://www.example.com/sitemap_test_2.xml.gz"
           )
           expect(result.search("sitemapindex/sitemap[8]/lastmod").inner_text).to eq("2020-01-01T00:00:00+09:00")
+        end
+      end
+      # exceptionally
+      context "when the specified file as args(index_path) does not exist" do
+        let(:index_path) { "spec/unexistfile" }
+        it "raise SitemapindexUpdateError" do
+          expect{ result }.to raise_error(SitemapindexUpdateError)
+          expect{ result }.to raise_error("The sitemap index file does not exist at the specified path.")
         end
       end
     end

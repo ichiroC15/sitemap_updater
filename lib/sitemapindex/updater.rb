@@ -12,7 +12,7 @@ module Sitemapindex
       # @return File
       # the updated sitemapindex file
       def update_sitemapindex(start_time, sitemapindex_path, sitemap_name, sitemap_paths, toppage_url)
-        raise "" unless File.exist?(sitemapindex_path)
+        raise SitemapindexUpdateError, "The sitemap index file does not exist at the specified path." unless File.exist?(sitemapindex_path)
 
         xml_doc         = Zlib::GzipReader.open(sitemapindex_path) { |gz| Nokogiri::XML(gz) }
         deleted_xml_doc = delete_old_nodes(xml_doc, sitemap_name)

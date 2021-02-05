@@ -13,6 +13,9 @@ module Sitemaps
       # @return Arr
       # the paths of the created sitemaps
       def create_sitemaps(start_time, sitemaps_dir, sitemap_name, urls, conds)
+        raise SitemapsCreateError, "The specified directory does not exist." unless Dir.exist?(sitemaps_dir)
+        raise SitemapsCreateError, "The given URL array is empty." if urls.empty?
+
         sitemap_paths = []
         grouped_urls = urls.each_slice(MAX_NUM_URLS).to_a
         grouped_urls.each_with_index do |sliced_urls, idx|
