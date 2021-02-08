@@ -1,8 +1,7 @@
 # SitemapUpdater
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sitemap_updater`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This Gem allows to create sitemaps for a given URL.
+Each sitemap consists of up tp 5000 URLs and the file name is "the specified sitemap name + _file number".
+You can also add the information from the sitemap you have created to the index file.
 
 ## Installation
 
@@ -21,18 +20,51 @@ Or install it yourself as:
     $ gem install sitemap_updater
 
 ## Usage
+If you have an existing sitemaps in the directory `/home/sitemaps/` and
+you want to create sitemaps file called `item.xml.gz`, you can specify the arguments as fellows.
 
-TODO: Write usage instructions here
+```ruby
+  updater = SitemapUpdater.new("/home/sitemaps/", "item")
+```
 
-## Development
+Prepare an array of URLs that you want to include in the sitemaps.
+For example, if you want to register the URLs of all "items" as "https://www.example.com/item/[item_id]",
+set the argument `urls` as follows.
+```ruby
+  item_ids = Item.all.pluck(:item_id)
+  urls     = item_ids.map{ |id| "https://www.example.com/item/#{id}"}
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+If you'd like create sitemaps to add those information to the sitemap index file (sitemap.xml.gz), you can do the following.
+When the path of the sitemap index file (sitemap.xml.gz) is `/home/sitemap.xml.gz` and
+the URL of the web toppage is "http://www.example.com/",
+you can specify the arguments as follows.
+```ruby
+  updater.update(urls, "/home/sitemap.xml.gz", "http://www.example.com/")
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can also set the frequency and priority of URL updates.
+The default value for the frequency is "daily" and for the priority is "0.5".
+For more information on the frequency and priority of updates, please see the [official page](https://www.sitemaps.org/ja/protocol.html).
+```ruby
+  updater.update(urls, sitemapindex_path, toppage_url, "daily", "0.5")
+```
+
+If you only want to create a sitemap and not register it in the sitemap index file (sitemap.xml.gz), you can do the following.
+```ruby
+  updater.only_create_sitemaps(urls)
+```
+
+You can also set the frequency and priority of URL updates.
+The default value for the frequency is "daily" and for the priority is "0.5".
+For more information on the frequency and priority of updates, please see the [official page](https://www.sitemaps.org/ja/protocol.html).
+```ruby
+  updater.only_create_sitemaps(urls, "daily", "0.5")
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sitemap_updater. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/sitemap_updater/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/ichiroC15/sitemap_updater. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/ichiroC15/sitemap_updater/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
