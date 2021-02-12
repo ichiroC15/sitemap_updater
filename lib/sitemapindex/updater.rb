@@ -1,4 +1,5 @@
 require "sitemap_updater/version"
+require "zlib"
 
 module Sitemapindex
   class Updater
