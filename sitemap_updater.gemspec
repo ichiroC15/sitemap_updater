@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.email         = ["ichiro.n.c15@gmail.com"]
 
   spec.summary       = "This Gem allows to create sitemaps for a given URL."
-  spec.description   = "Each sitemap consists of up tp 5000 URLs and the file name is 'the specified sitemap name + _file number'. You can also add the information from the sitemap you have created to the index file."
+  spec.description   = "This Gem allows to create sitemaps for a given URL. Each sitemap consists of up tp 5000 URLs and the file name is 'the specified sitemap name + _file number'. You can also add the information from the sitemap you have created to the index file."
   spec.homepage      = "https://github.com/ichiroC15/sitemap_updater"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org/"
 
