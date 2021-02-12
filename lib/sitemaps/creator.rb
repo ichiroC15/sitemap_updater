@@ -1,4 +1,7 @@
 require "sitemap_updater/version"
+require "nokogiri"
+require "tilt"
+require "zlib"
 
 module Sitemaps
   class Creator

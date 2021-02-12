@@ -24,7 +24,7 @@ module SitemapUpdater
       conds         = { "frequency" => freq, "priority" => prio }
       sitemap_paths = Sitemaps::Creator.create_sitemaps(@start_time, @sitemaps_dir, @sitemap_name, urls, conds)
       Sitemapindex::Updater.
-        update_sitemapindex(@start_time, sitemapindex_path, sitemap_name, sitemap_paths, toppage_url)
+        update_sitemapindex(@start_time, sitemapindex_path, @sitemap_name, sitemap_paths, toppage_url)
     end
 
     # only create the sitemap files, not update the sitemapindex file

@@ -24,7 +24,7 @@ If you have an existing sitemaps in the directory `/home/sitemaps/` and
 you want to create sitemaps file called `item.xml.gz`, you can specify the arguments as fellows.
 
 ```ruby
-  updater = SitemapUpdater.new("/home/sitemaps/", "item")
+  updatercont = SitemapUpdater::Cont.new("/home/sitemaps/", "item")
 ```
 
 Prepare an array of URLs that you want to include in the sitemaps.
@@ -40,26 +40,26 @@ When the path of the sitemap index file (sitemap.xml.gz) is `/home/sitemap.xml.g
 the URL of the web toppage is "http://www.example.com/",
 you can specify the arguments as follows.
 ```ruby
-  updater.update(urls, "/home/sitemap.xml.gz", "http://www.example.com/")
+  updatercont.update(urls, "/home/sitemap.xml.gz", "http://www.example.com/")
 ```
 
 You can also set the frequency and priority of URL updates.
 The default value for the frequency is "daily" and for the priority is "0.5".
 For more information on the frequency and priority of updates, please see the [official page](https://www.sitemaps.org/ja/protocol.html).
 ```ruby
-  updater.update(urls, sitemapindex_path, toppage_url, "daily", "0.5")
+  updatercont.update(urls, sitemapindex_path, toppage_url, "daily", "0.5")
 ```
 
 If you only want to create a sitemap and not register it in the sitemap index file (sitemap.xml.gz), you can do the following.
 ```ruby
-  updater.only_create_sitemaps(urls)
+  updatercont.only_create_sitemaps(urls)
 ```
 
 You can also set the frequency and priority of URL updates.
 The default value for the frequency is "daily" and for the priority is "0.5".
 For more information on the frequency and priority of updates, please see the [official page](https://www.sitemaps.org/ja/protocol.html).
 ```ruby
-  updater.only_create_sitemaps(urls, "daily", "0.5")
+  updatercont.only_create_sitemaps(urls, "daily", "0.5")
 ```
 
 ## Contributing
