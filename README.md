@@ -2,6 +2,7 @@
 This Gem allows to create sitemaps for a given URL.
 Each sitemap consists of up tp 5000 URLs and the file name is "the specified sitemap name + _file number".
 You can also add the information from the sitemap you have created to the index file.
+The latest version is 0.1.0.
 
 ## Installation
 
